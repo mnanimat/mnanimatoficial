@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#090a11" />
+    <meta name="description" content="MN Animat — 3D animation, product visualization and interactive experiences." />
+    <meta property="og:title" content="MN Animat — Interactive 3D" />
+    <meta property="og:description" content="Explore an animated motorcycle in an interactive 3D experience." />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="/assets/moto-funcional4-animada-v2.glb" as="fetch" crossorigin="anonymous" />
+    <title>MN Animat — Interactive 3D Experience</title>
+  </head>
+  <body>
+    <div class="noise" aria-hidden="true"></div>
+
+    <header class="site-header" id="home">
+      <a class="brand" href="#home" aria-label="MN Animat home">
+        <svg class="brand-mark" viewBox="0 0 64 42" aria-hidden="true">
+          <path d="M4 32 15 11l3 14L32 5l-2 18 17-12-8 18 21-15" />
+        </svg>
+        <span><strong>MN</strong> Animat</span>
+      </a>
+
+      <button class="mobile-menu" type="button" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="#home">Home</a>
+        <a href="#motorcycle">Motorcycle</a>
+        <a href="#services">Services</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#about">About</a>
+      </nav>
+
+      <a class="button button-outline header-quote" href="#quote">
+        Request a quote
+        <span aria-hidden="true">→</span>
+      </a>
+    </header>
+
+    <main>
+      <section class="hero section-shell">
+        <div class="hero-copy">
+          <span class="eyebrow"><i></i> 3D animation studio</span>
+          <h1>Ideas in motion.<br /><em>Worlds in 3D.</em></h1>
+          <p>
+            Character animation, product visualization and interactive 3D experiences built to explain, engage and sell.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#motorcycle">Explore the motorcycle <span>↓</span></a>
+            <a class="button button-ghost" href="#portfolio">View portfolio</a>
+          </div>
+        </div>
+        <div class="hero-stat-grid" aria-label="Studio highlights">
+          <article><strong>3D</strong><span>Animation</span></article>
+          <article><strong>Web</strong><span>Interactive</span></article>
+          <article><strong>360°</strong><span>Visualization</span></article>
+        </div>
+      </section>
+
+      <section class="viewer-section" id="motorcycle">
+        <div class="viewer-topbar section-shell">
+          <div>
+            <span class="eyebrow"><i></i> animated 3D</span>
+            <h2>Interactive motorcycle</h2>
+          </div>
+          <p>Drag to rotate, scroll to zoom and use the controls to inspect the animated assembly.</p>
+        </div>
+
+        <div class="viewer-frame" id="viewerFrame">
+          <div class="viewer-glow" aria-hidden="true"></div>
+          <div class="viewer-grid" aria-hidden="true"></div>
+
+          <div class="viewer-status" id="loadingState" role="status">
+            <span class="loader"></span>
+            <strong>Loading the animated motorcycle</strong>
+            <small>Downloading the optimized 3D model…</small>
+          </div>
+
+          <div class="viewer-error" id="errorState" hidden>
+            <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 7 58 54H6L32 7Zm0 16v15m0 8v2" /></svg>
+            <strong>3D preview unavailable</strong>
+            <span id="errorMessage">The model could not be loaded.</span>
+            <button type="button" id="retryModel">Try again</button>
+          </div>
+
+          <model-viewer
+            id="motorcycleModel"
+            src="/assets/moto-funcional4-animada-v2.glb"
+            alt="Interactive animated 3D motorcycle"
+            camera-controls
+            auto-rotate
+            auto-rotate-delay="0"
+            rotation-per-second="14deg"
+            camera-orbit="35deg 72deg 105%"
+            min-camera-orbit="auto 20deg 60%"
+            max-camera-orbit="auto 105deg 220%"
+            field-of-view="28deg"
+            min-field-of-view="18deg"
+            max-field-of-view="45deg"
+            shadow-intensity="1.25"
+            shadow-softness="0.85"
+            exposure="1.1"
+            environment-image="neutral"
+            interaction-prompt="none"
+            loading="eager"
+            reveal="auto"
+            crossorigin="anonymous"
+          ></model-viewer>
+
+          <div class="viewer-badge"><span></span> ANIMATED 3D</div>
+
+          <div class="viewer-utility">
+            <button type="button" id="resetView" title="Reset view" aria-label="Reset view">
+              <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8m0-5v5h5" /></svg>
+            </button>
+            <button type="button" id="fullscreenView" title="Fullscreen" aria-label="Open fullscreen">
+              <svg viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M8 21H3v-5m13 5h5v-5" /></svg>
+            </button>
+          </div>
+
+          <div class="hotspots" id="hotspots" aria-label="Motorcycle components">
+            <button class="hotspot hotspot-front" data-part="front"><span></span><em>Front wheel</em></button>
+            <button class="hotspot hotspot-engine" data-part="engine"><span></span><em>Engine</em></button>
+            <button class="hotspot hotspot-tank" data-part="tank"><span></span><em>Fuel tank</em></button>
+            <button class="hotspot hotspot-rear" data-part="rear"><span></span><em>Rear wheel</em></button>
+            <button class="hotspot hotspot-seat" data-part="seat"><span></span><em>Seat</em></button>
+          </div>
+
+          <aside class="part-card" id="partCard" hidden>
+            <button type="button" class="part-card-close" id="closePart" aria-label="Close component details">×</button>
+            <span>Selected component</span>
+            <h3 id="partTitle">Front wheel</h3>
+            <p id="partDescription"></p>
+            <button type="button" id="returnFull">Return to full view</button>
+          </aside>
+
+          <div class="presentation-card" id="presentationCard" hidden>
+            <span>Component presentation</span>
+            <strong id="presentationLabel">Preparing the first component</strong>
+          </div>
+
+          <div class="animation-controls" aria-label="Animation controls">
+            <button type="button" id="presentParts" disabled>
+              <svg viewBox="0 0 24 24"><path d="m4 17 6-6m0 0H5m5 0v5m10-9-6 6m0 0h5m-5 0V8" /></svg>
+              Present parts
+            </button>
+            <button type="button" id="explodeModel" disabled>
+              <svg viewBox="0 0 24 24"><path d="m12 2 8 5-8 5-8-5 8-5Zm-8 10 8 5 8-5M4 17l8 5 8-5" /></svg>
+              <span>Explode motorcycle</span>
+            </button>
+          </div>
+
+          <div class="camera-controls" aria-label="Camera controls">
+            <button type="button" class="active" data-view="full">Full view</button>
+            <button type="button" data-view="front">Front</button>
+            <button type="button" data-view="side">Side</button>
+            <button type="button" data-view="rear">Rear</button>
+            <button type="button" data-view="top">Top</button>
+          </div>
+
+          <button class="auto-rotate" type="button" id="autoRotate" aria-pressed="true">
+            <svg class="play-icon" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7V5Z" /></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24"><path d="M8 5v14m8-14v14" /></svg>
+            <span>Pause rotation</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="services section-shell" id="services">
+        <div class="section-heading">
+          <span class="eyebrow"><i></i> what we create</span>
+          <h2>Motion that makes<br /><em>ideas tangible.</em></h2>
+          <p>From expressive characters to precise technical visualization, every project is designed around your objective.</p>
+        </div>
+
+        <div class="service-grid">
+          <article class="service-card featured">
+            <span class="service-index">01</span>
+            <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 3 4 7v10l8 4 8-4V7l-8-4Zm0 0v9m8-5-8 5-8-5m8 5v9" /></svg></div>
+            <h3>3D Product Animation</h3>
+            <p>Product films, exploded views and technical sequences that reveal function, construction and value.</p>
+            <span class="service-price">Starting at R$ 900</span>
+          </article>
+          <article class="service-card">
+            <span class="service-index">02</span>
+            <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-7 17v-2a6 6 0 0 1 6-6h2a6 6 0 0 1 6 6v2M8 8H5m14 0h-3" /></svg></div>
+            <h3>Character Animation</h3>
+            <p>Body mechanics, acting, dialogue and stylized action for shorts, advertising, games and social content.</p>
+            <span class="service-price">Starting at R$ 750</span>
+          </article>
+          <article class="service-card">
+            <span class="service-index">03</span>
+            <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4V5Zm4 4 3 3-3 3m5 0h3" /></svg></div>
+            <h3>Interactive 3D Web</h3>
+            <p>Browser-based product viewers, configurators and interactive experiences optimized for desktop and mobile.</p>
+            <span class="service-price">Starting at R$ 1,200</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="portfolio" id="portfolio">
+        <div class="section-shell section-heading horizontal">
+          <div>
+            <span class="eyebrow"><i></i> selected work</span>
+            <h2>Built to move.<br /><em>Designed to communicate.</em></h2>
+          </div>
+          <p>Every frame is developed with clear staging, readable movement and a finish adapted to the platform where it will live.</p>
+        </div>
+
+        <div class="portfolio-grid section-shell">
+          <article class="portfolio-card portfolio-moto">
+            <div class="portfolio-art"><span class="ring r1"></span><span class="ring r2"></span><svg viewBox="0 0 180 100"><path d="M22 70h25l17-28h33l20 28h35M47 70a17 17 0 1 1-34 0 17 17 0 0 1 34 0Zm120 0a17 17 0 1 1-34 0 17 17 0 0 1 34 0ZM64 42l-8-20h22m19 20 18-15h18" /></svg></div>
+            <div class="portfolio-meta"><span>Product visualization</span><h3>Motorcycle Exploded View</h3><p>Interactive model, technical separation and assembly animation.</p></div>
+          </article>
+          <article class="portfolio-card portfolio-character">
+            <div class="portfolio-art"><span class="character-head"></span><span class="character-body"></span><span class="motion-line m1"></span><span class="motion-line m2"></span></div>
+            <div class="portfolio-meta"><span>Character animation</span><h3>Dynamic Performance</h3><p>Expressive poses, timing and stylized movement.</p></div>
+          </article>
+          <article class="portfolio-card portfolio-brand">
+            <div class="portfolio-art"><svg class="big-mark" viewBox="0 0 64 42"><path d="M4 32 15 11l3 14L32 5l-2 18 17-12-8 18 21-15" /></svg></div>
+            <div class="portfolio-meta"><span>Motion design</span><h3>Brand in Motion</h3><p>Logo animation and graphic systems for digital campaigns.</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="about section-shell" id="about">
+        <div class="about-visual">
+          <div class="about-orbit orbit-one"></div>
+          <div class="about-orbit orbit-two"></div>
+          <svg viewBox="0 0 64 42"><path d="M4 32 15 11l3 14L32 5l-2 18 17-12-8 18 21-15" /></svg>
+        </div>
+        <div class="about-copy">
+          <span class="eyebrow"><i></i> about mn animat</span>
+          <h2>Technique, clarity<br />and <em>purposeful motion.</em></h2>
+          <p>MN Animat is a Brazilian 3D animation studio focused on turning complex ideas into clear, attractive visual experiences.</p>
+          <p>Projects are developed with direct communication, visible production stages and deliverables optimized for each channel.</p>
+          <div class="about-points"><span>✓ Remote worldwide</span><span>✓ Custom production</span><span>✓ Web-ready delivery</span></div>
+        </div>
+      </section>
+
+      <section class="quote-section" id="quote">
+        <div class="section-shell quote-layout">
+          <div>
+            <span class="eyebrow"><i></i> start a project</span>
+            <h2>Have an idea?<br /><em>Let’s give it motion.</em></h2>
+            <p>Describe the project and the message will be prepared for WhatsApp.</p>
+            <a class="contact-line" href="mailto:mnanimat@gmail.com">mnanimat@gmail.com</a>
+            <a class="contact-line" href="https://wa.me/5575982321124" target="_blank" rel="noreferrer">+55 (75) 98232-1124</a>
+          </div>
+          <form class="quote-form" id="quoteForm">
+            <label>Name<input name="name" required autocomplete="name" placeholder="Your name" /></label>
+            <label>Email<input name="email" type="email" required autocomplete="email" placeholder="you@email.com" /></label>
+            <label>Service<select name="service" required><option value="">Select a service</option><option>3D Product Animation</option><option>Character Animation</option><option>Interactive 3D Web</option><option>Motion Design</option><option>Other</option></select></label>
+            <label>Project details<textarea name="details" rows="5" required placeholder="Tell us about your project, deadline and references"></textarea></label>
+            <button class="button button-primary" type="submit">Request through WhatsApp <span>→</span></button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer section-shell">
+      <a class="brand" href="#home"><svg class="brand-mark" viewBox="0 0 64 42"><path d="M4 32 15 11l3 14L32 5l-2 18 17-12-8 18 21-15" /></svg><span><strong>MN</strong> Animat</span></a>
+      <p>3D animation and interactive experiences.</p>
+      <span>© <span id="currentYear"></span> MN Animat.</span>
+    </footer>
+
+    <a class="floating-quote" href="#quote" aria-label="Request a quote">
+      <svg viewBox="0 0 24 24"><path d="M20 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.9-1.2L3 20l1.3-3.8A8.4 8.4 0 1 1 20 11.5Z" /></svg>
+      Request a quote
+    </a>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
