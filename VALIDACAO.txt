@@ -1,0 +1,33 @@
+VALIDAÇÃO DO PROJETO MN ANIMAT
+==================================
+
+Arquivo GLB: public/assets/moto-funcional4-animada-v2.glb
+Tamanho: 3.96 MB
+SHA-256: d575b8b9fda5e93fd54e36dc6963e454d69bfec61ae26e5ff6be60d83d87be77
+Nós: 177
+Malhas: 80
+Materiais: 9
+
+Animações:
+- Exploded_View: 161 canais, 6.71 s
+- Assemble_View: 161 canais, 6.71 s
+- Parts_Presentation: 161 canais, 13.75 s
+
+Verificações:
+- [OK] Assinatura GLB válida
+- [OK] Versão GLB 2
+- [OK] Tamanho declarado correto
+- [OK] Caminho no HTML correto
+- [OK] Caminho no JavaScript correto
+- [OK] Sem rewrite global para index.html
+- [OK] Três animações esperadas
+
+Build testado com:
+- Node.js 22
+- npm 10
+- Vite 8.1.0
+- @google/model-viewer 4.3.1
+
+Resultado: npm run build concluído com sucesso.
+Observação: a renderização WebGL deve ser conferida no Chrome/Edge após o deploy,
+pois ambientes sem GPU/EGL não conseguem produzir uma prévia visual confiável.
