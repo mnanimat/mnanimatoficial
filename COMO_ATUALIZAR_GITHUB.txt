@@ -1,0 +1,40 @@
+COMO COLOCAR O PROJETO CORRIGIDO NO GITHUB
+==========================================
+
+MÉTODO MAIS SEGURO PELO GITHUB DESKTOP
+
+1. Baixe e extraia o arquivo ZIP deste projeto.
+2. Abra o GitHub Desktop.
+3. Selecione o repositório mnanimat.
+4. Clique em Repository > Show in Explorer.
+5. Na pasta do repositório, apague os arquivos e pastas antigos, MAS NÃO APAGUE
+   a pasta oculta .git.
+6. Copie para essa pasta todo o conteúdo da pasta MN_ANIMAT_SITE_CORRIGIDO.
+7. Volte ao GitHub Desktop.
+8. Em Summary, escreva:
+   Corrige modelo 3D e animações
+9. Clique em Commit to main.
+10. Clique em Push origin.
+11. Abra a Vercel e aguarde o novo deployment ficar como Ready.
+12. Abra o site e pressione Ctrl + F5.
+
+IMPORTANTE
+
+- Não coloque os arquivos dentro de uma subpasta no repositório. O package.json,
+  index.html e vercel.json devem aparecer diretamente na raiz do GitHub.
+- O modelo deve permanecer exatamente neste caminho:
+  public/assets/moto-funcional4-animada-v2.glb
+- Não renomeie o GLB.
+- Não recoloque o rewrite global antigo no vercel.json.
+
+CONFIGURAÇÃO DA VERCEL
+
+Framework Preset: Vite
+Build Command: npm run build
+Output Directory: dist
+Install Command: npm ci --no-audit --no-fund
+Node.js Version: 22.x
+
+Se a Vercel estiver usando configurações antigas salvas no painel:
+Settings > Build and Deployment > Framework Settings > marque Override e use os
+valores acima. Depois faça Redeploy sem usar o cache anterior.
