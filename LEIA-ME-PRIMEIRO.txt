@@ -1,0 +1,51 @@
+CORREÇÃO DO BUILD DA VERCEL — MN ANIMAT
+
+CAUSA
+
+O package-lock.json atual contém URLs internas da OpenAI, por exemplo:
+
+packages.applied-caas-gateway1.internal.api.openai.org
+
+A Vercel não consegue acessar esse servidor. O npm fica tentando baixar os
+pacotes até encerrar com:
+
+Exit handler never called!
+
+A CORREÇÃO NÃO ALTERA OS ARQUIVOS GLB.
+
+COMO USAR NO WINDOWS
+
+1. Extraia este ZIP.
+2. Copie todos os arquivos para a pasta principal do projeto.
+3. Confirme que essa pasta contém package.json, src e public.
+4. Execute CORRIGIR_BUILD.bat.
+5. Aguarde o npm instalar e o build terminar.
+6. Abra o GitHub Desktop.
+7. Confirme que estes arquivos aparecem:
+   .npmrc
+   vercel.json
+   package-lock.json
+8. Faça Commit to main.
+9. Faça Push origin.
+10. Aguarde o novo deploy da Vercel.
+
+IMPORTANTE
+
+O script apaga apenas:
+- package-lock.json antigo
+- pasta node_modules local
+
+Depois ele gera um package-lock.json novo usando:
+https://registry.npmjs.org/
+
+Ele não apaga, não renomeia e não modifica nenhum arquivo .glb.
+
+CORREÇÃO RÁPIDA SEM EXECUTAR O BAT
+
+1. Apague package-lock.json do repositório.
+2. Substitua vercel.json pelo arquivo deste pacote.
+3. Adicione .npmrc.
+4. Faça Commit e Push.
+
+O vercel.json também apaga o lock inválido temporariamente durante a instalação,
+por isso o deploy pode funcionar mesmo antes de um novo lock ser gerado.
